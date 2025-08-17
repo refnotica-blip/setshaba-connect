@@ -6,12 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, TrendingUp, CheckCircle, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+
 export const Home: React.FC = () => {
   const { issues, announcements } = useApp();
   
   const urgentIssues = issues.filter(issue => issue.isUrgent);
-  const recentIssues = issues.slice(0, 3);
-  const recentAnnouncements = announcements.slice(0, 2);
+  const recentIssues = issues.slice(0, 2);
+  const recentAnnouncements = announcements.slice(0, 1);
   
   const stats = {
     total: issues.length,
@@ -21,83 +22,83 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-20 md:pb-0">
-      <div className="max-w-content mx-auto px-4 py-6 space-y-8">
+    <div className="min-h-screen bg-background pb-20 md:pb-0 overflow-hidden">
+      <div className="max-w-content mx-auto px-4 py-4 md:py-6">
         {/* Hero Section */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-accent to-primary/80 shadow-2xl">
+        <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-br from-primary via-accent to-primary/80 shadow-2xl mb-4 md:mb-8">
           <div className="absolute inset-0 bg-black/20"></div>
-          <div className="relative px-8 py-16 text-center text-white">
+          <div className="relative px-4 md:px-8 py-8 md:py-16 text-center text-white">
             <div className="mx-auto max-w-2xl">
-              <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white to-white/90 bg-clip-text text-transparent">
+              <h1 className="text-2xl md:text-5xl font-bold mb-2 md:mb-4 bg-gradient-to-r from-white to-white/90 bg-clip-text text-transparent">
                 Welcome to Setshaba Connect
               </h1>
-              <p className="text-xl mb-8 text-white/90 leading-relaxed">
+              <p className="text-sm md:text-xl mb-4 md:mb-8 text-white/90 leading-relaxed">
                 Your voice matters. Report issues, track progress, and help build a better community together.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 shadow-lg transform hover:scale-105 transition-all duration-200">
+              <div className="flex flex-col sm:flex-row gap-2 md:gap-4 justify-center">
+                <Button asChild size="sm" className="bg-white text-primary hover:bg-white/90 shadow-lg transform hover:scale-105 transition-all duration-200 md:size-lg">
                   <Link to="/report" className="flex items-center gap-2">
                     <AlertTriangle className="h-5 w-5" />
                     Report an Issue
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm">
+                <Button asChild variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm md:size-lg">
                   <Link to="/issues">View All Issues</Link>
                 </Button>
               </div>
             </div>
           </div>
           {/* Decorative elements */}
-          <div className="absolute top-4 right-4 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
-          <div className="absolute bottom-4 left-4 w-24 h-24 bg-accent/20 rounded-full blur-lg"></div>
+          <div className="absolute top-2 right-2 md:top-4 md:right-4 w-16 h-16 md:w-32 md:h-32 bg-white/10 rounded-full blur-xl"></div>
+          <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 w-12 h-12 md:w-24 md:h-24 bg-accent/20 rounded-full blur-lg"></div>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-4 md:mb-8">
           <Card className="shadow-lg hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20">
-            <CardContent className="flex items-center p-6">
-              <div className="p-3 bg-blue-500 rounded-xl mr-4">
-                <AlertTriangle className="h-6 w-6 text-white" />
+            <CardContent className="flex items-center p-3 md:p-6">
+              <div className="p-2 md:p-3 bg-blue-500 rounded-lg md:rounded-xl mr-2 md:mr-4">
+                <AlertTriangle className="h-4 w-4 md:h-6 md:w-6 text-white" />
               </div>
               <div>
-                <p className="text-3xl font-bold text-blue-700 dark:text-blue-300">{stats.total}</p>
-                <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">Total Issues</p>
+                <p className="text-xl md:text-3xl font-bold text-blue-700 dark:text-blue-300">{stats.total}</p>
+                <p className="text-xs md:text-sm text-blue-600 dark:text-blue-400 font-medium">Total</p>
               </div>
             </CardContent>
           </Card>
           
           <Card className="shadow-lg hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20">
-            <CardContent className="flex items-center p-6">
-              <div className="p-3 bg-red-500 rounded-xl mr-4">
-                <Clock className="h-6 w-6 text-white" />
+            <CardContent className="flex items-center p-3 md:p-6">
+              <div className="p-2 md:p-3 bg-red-500 rounded-lg md:rounded-xl mr-2 md:mr-4">
+                <Clock className="h-4 w-4 md:h-6 md:w-6 text-white" />
               </div>
               <div>
-                <p className="text-3xl font-bold text-red-700 dark:text-red-300">{stats.urgent}</p>
-                <p className="text-sm text-red-600 dark:text-red-400 font-medium">Urgent</p>
+                <p className="text-xl md:text-3xl font-bold text-red-700 dark:text-red-300">{stats.urgent}</p>
+                <p className="text-xs md:text-sm text-red-600 dark:text-red-400 font-medium">Urgent</p>
               </div>
             </CardContent>
           </Card>
           
           <Card className="shadow-lg hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20">
-            <CardContent className="flex items-center p-6">
-              <div className="p-3 bg-yellow-500 rounded-xl mr-4">
-                <TrendingUp className="h-6 w-6 text-white" />
+            <CardContent className="flex items-center p-3 md:p-6">
+              <div className="p-2 md:p-3 bg-yellow-500 rounded-lg md:rounded-xl mr-2 md:mr-4">
+                <TrendingUp className="h-4 w-4 md:h-6 md:w-6 text-white" />
               </div>
               <div>
-                <p className="text-3xl font-bold text-yellow-700 dark:text-yellow-300">{stats.inProgress}</p>
-                <p className="text-sm text-yellow-600 dark:text-yellow-400 font-medium">In Progress</p>
+                <p className="text-xl md:text-3xl font-bold text-yellow-700 dark:text-yellow-300">{stats.inProgress}</p>
+                <p className="text-xs md:text-sm text-yellow-600 dark:text-yellow-400 font-medium">Progress</p>
               </div>
             </CardContent>
           </Card>
           
           <Card className="shadow-lg hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20">
-            <CardContent className="flex items-center p-6">
-              <div className="p-3 bg-green-500 rounded-xl mr-4">
-                <CheckCircle className="h-6 w-6 text-white" />
+            <CardContent className="flex items-center p-3 md:p-6">
+              <div className="p-2 md:p-3 bg-green-500 rounded-lg md:rounded-xl mr-2 md:mr-4">
+                <CheckCircle className="h-4 w-4 md:h-6 md:w-6 text-white" />
               </div>
               <div>
-                <p className="text-3xl font-bold text-green-700 dark:text-green-300">{stats.resolved}</p>
-                <p className="text-sm text-green-600 dark:text-green-400 font-medium">Resolved</p>
+                <p className="text-xl md:text-3xl font-bold text-green-700 dark:text-green-300">{stats.resolved}</p>
+                <p className="text-xs md:text-sm text-green-600 dark:text-green-400 font-medium">Resolved</p>
               </div>
             </CardContent>
           </Card>
@@ -105,9 +106,9 @@ export const Home: React.FC = () => {
 
         {/* Urgent Issues Alert */}
         {urgentIssues.length > 0 && (
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4 mb-4 md:mb-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-urgent flex items-center gap-2">
+              <h2 className="text-lg md:text-xl font-semibold text-urgent flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5" />
                 Urgent Issues
               </h2>
@@ -115,29 +116,34 @@ export const Home: React.FC = () => {
                 {urgentIssues.length} Active
               </Badge>
             </div>
-            <div className="grid gap-4">
-              {urgentIssues.map(issue => (
+            <div className="space-y-3">
+              {urgentIssues.slice(0, 1).map(issue => (
                 <IssueCard key={issue.id} issue={issue} />
               ))}
+              {urgentIssues.length > 1 && (
+                <Button asChild variant="outline" size="sm" className="w-full">
+                  <Link to="/issues">View All {urgentIssues.length} Urgent Issues</Link>
+                </Button>
+              )}
             </div>
           </div>
         )}
 
         {/* Recent Announcements */}
         {recentAnnouncements.length > 0 && (
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4 mb-4 md:mb-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold">Latest Updates</h2>
+              <h2 className="text-lg md:text-xl font-semibold">Latest Updates</h2>
               <Button asChild variant="outline" size="sm">
                 <Link to="/announcements">View All</Link>
               </Button>
             </div>
-            <div className="grid gap-4">
+            <div className="space-y-3">
               {recentAnnouncements.map(announcement => (
                 <Card key={announcement.id} className="shadow-card">
-                  <CardHeader>
+                  <CardHeader className="pb-2 md:pb-6">
                     <div className="flex items-start justify-between">
-                      <CardTitle className="text-lg">{announcement.title}</CardTitle>
+                      <CardTitle className="text-base md:text-lg">{announcement.title}</CardTitle>
                       {announcement.isUrgent && (
                         <Badge variant="destructive" className="bg-urgent">
                           Urgent
@@ -145,8 +151,8 @@ export const Home: React.FC = () => {
                       )}
                     </div>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">{announcement.description}</p>
+                  <CardContent className="pt-0">
+                    <p className="text-sm md:text-base text-muted-foreground line-clamp-2">{announcement.description}</p>
                     <div className="mt-2 text-xs text-muted-foreground">
                       {new Date(announcement.publishedAt).toLocaleDateString()}
                     </div>
@@ -158,14 +164,14 @@ export const Home: React.FC = () => {
         )}
 
         {/* Recent Issues */}
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4 mb-4 md:mb-8">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Recent Issues</h2>
+            <h2 className="text-lg md:text-xl font-semibold">Recent Issues</h2>
             <Button asChild variant="civic" size="sm">
               <Link to="/issues">View All Issues</Link>
             </Button>
           </div>
-          <div className="grid gap-4">
+          <div className="space-y-3">
             {recentIssues.map(issue => (
               <IssueCard key={issue.id} issue={issue} />
             ))}
@@ -175,27 +181,27 @@ export const Home: React.FC = () => {
         {/* Quick Actions */}
         <Card className="shadow-civic">
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
+            <CardTitle className="text-lg md:text-xl">Quick Actions</CardTitle>
           </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Button asChild variant="civic" className="h-auto p-4">
+          <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+            <Button asChild variant="civic" className="h-auto p-3 md:p-4">
               <Link to="/report" className="flex flex-col items-center gap-2">
-                <AlertTriangle className="h-8 w-8" />
-                <span>Report an Issue</span>
+                <AlertTriangle className="h-6 w-6 md:h-8 md:w-8" />
+                <span className="text-sm md:text-base">Report an Issue</span>
               </Link>
             </Button>
             
-            <Button asChild variant="outline" className="h-auto p-4">
+            <Button asChild variant="outline" className="h-auto p-3 md:p-4">
               <Link to="/events" className="flex flex-col items-center gap-2">
-                <Clock className="h-8 w-8" />
-                <span>View Events</span>
+                <Clock className="h-6 w-6 md:h-8 md:w-8" />
+                <span className="text-sm md:text-base">View Events</span>
               </Link>
             </Button>
             
-            <Button asChild variant="outline" className="h-auto p-4">
+            <Button asChild variant="outline" className="h-auto p-3 md:p-4">
               <Link to="/feedback" className="flex flex-col items-center gap-2">
-                <CheckCircle className="h-8 w-8" />
-                <span>Give Feedback</span>
+                <CheckCircle className="h-6 w-6 md:h-8 md:w-8" />
+                <span className="text-sm md:text-base">Give Feedback</span>
               </Link>
             </Button>
           </CardContent>

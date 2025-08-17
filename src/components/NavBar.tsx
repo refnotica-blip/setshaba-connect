@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Home, AlertTriangle, Plus, Calendar, MessageSquare, LogIn } from "lucide-react";
+import { Home, AlertTriangle, Plus, Calendar, MessageSquare, Shield } from "lucide-react";
 import { useApp } from "@/contexts/AppContext";
 
 export const NavBar: React.FC = () => {
   const location = useLocation();
-  const { isAdmin } = useApp();
+  const { isAdmin, setIsAdmin } = useApp();
   
   const isActive = (path: string) => location.pathname === path;
   
@@ -17,6 +17,14 @@ export const NavBar: React.FC = () => {
     { path: "/events", icon: Calendar, label: "Events" },
     { path: "/feedback", icon: MessageSquare, label: "Feedback" },
   ];
+
+  const handleAdminToggle = () => {
+    if (isAdmin) {
+      setIsAdmin(false);
+    } else {
+      setIsAdmin(true);
+    }
+  };
 
   if (isAdmin) {
     return null; // Admin uses sidebar navigation
@@ -49,20 +57,25 @@ export const NavBar: React.FC = () => {
               </Button>
             ))}
             
-            <Button asChild variant="outline" size="sm" className="border-primary/20 hover:bg-primary/5">
-              <Link to="/admin" className="flex items-center gap-2">
-                <LogIn className="h-4 w-4" />
-                Admin
-              </Link>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="border-primary/20 hover:bg-primary/5 flex items-center gap-2"
+              onClick={handleAdminToggle}
+            >
+              <Shield className="h-4 w-4" />
+              Admin
             </Button>
           </div>
           
           {/* Mobile navigation */}
           <div className="md:hidden">
-            <Button asChild variant="outline" size="sm">
-              <Link to="/admin">
-                <LogIn className="h-4 w-4" />
-              </Link>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={handleAdminToggle}
+            >
+              <Shield className="h-4 w-4" />
             </Button>
           </div>
         </div>

@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useApp } from "@/contexts/AppContext";
 import { Category } from "@/data/mockData";
+import { getCurrentLocation } from "@/utils/locationService";
 import { Camera, Send, MapPin, Locate } from "lucide-react";
 
 export const Report: React.FC = () => {
@@ -25,37 +26,23 @@ export const Report: React.FC = () => {
   const handleUseCurrentLocation = () => {
     setIsLocating(true);
     
-    if (!navigator.geolocation) {
-      toast({
-        title: "Location Not Supported",
-        description: "Your browser doesn't support location services.",
-        variant: "destructive"
-      });
-      setIsLocating(false);
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        // In a real app, you'd reverse geocode these coordinates
-        const locationString = `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
-        setFormData(prev => ({ ...prev, location: locationString }));
+    getCurrentLocation()
+      .then((result) => {
+        setFormData(prev => ({ ...prev, location: result.address }));
         setIsLocating(false);
         toast({
           title: "Location Added",
-          description: "Your current location has been added to the report.",
+          description: "Your current address has been added to the report.",
         });
-      },
-      (error) => {
+      })
+      .catch((error) => {
         setIsLocating(false);
         toast({
           title: "Location Error",
-          description: "Unable to get your location. Please enter it manually.",
+          description: error.message || "Unable to get your location. Please enter it manually.",
           variant: "destructive"
         });
-      }
-    );
+      });
   };
 
   const handlePhotoUpload = () => {

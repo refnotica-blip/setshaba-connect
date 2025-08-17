@@ -48,6 +48,13 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [announcements, setAnnouncements] = useState<Announcement[]>(mockData.announcements);
   const [isAdmin, setIsAdmin] = useState(false);
   
+  // Auto-redirect to dashboard when admin is enabled
+  React.useEffect(() => {
+    if (isAdmin && window.location.pathname === '/') {
+      window.location.href = '/admin/dashboard';
+    }
+  }, [isAdmin]);
+  
   const updateIssue = (id: number, updates: Partial<Issue>) => {
     setIssues(prev => prev.map(issue => 
       issue.id === id ? { ...issue, ...updates } : issue

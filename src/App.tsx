@@ -10,7 +10,6 @@ import { Issues } from "@/pages/citizen/Issues";
 import { Report } from "@/pages/citizen/Report";
 import { Events } from "@/pages/citizen/Events";
 import { Feedback } from "@/pages/citizen/Feedback";
-import { Login } from "@/pages/admin/Login";
 import { Dashboard } from "@/pages/admin/Dashboard";
 import { ManageIssues } from "@/pages/admin/ManageIssues";
 import { ManageAnnouncements } from "@/pages/admin/ManageAnnouncements";
@@ -34,7 +33,6 @@ const App = () => (
             <Route path="/report" element={<Report />} />
             <Route path="/events" element={<Events />} />
             <Route path="/feedback" element={<Feedback />} />
-            <Route path="/admin" element={<Login />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/issues" element={<ManageIssues />} />
             <Route path="/admin/announcements" element={<ManageAnnouncements />} />
